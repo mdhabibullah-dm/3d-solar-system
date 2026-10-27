@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050816">
+  <meta name="description" content="Explore an interactive 3D Solar System in Bangla.">
+  <title>Cosmos Explorer — 3D Solar System</title>
+  <link rel="stylesheet" href="./style.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main id="app">
+    <div id="space-container" aria-label="Interactive 3D solar system"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Cosmos Explorer home">
+        <span class="brand-mark">✦</span>
+        <span>
+          <strong>COSMOS EXPLORER</strong>
+          <small>একটি ইন্টারঅ্যাকটিভ মহাকাশ অভিযান</small>
+        </span>
+      </a>
+      <div class="top-actions">
+        <button id="pause-btn" class="ui-button">Ⅱ Pause</button>
+        <button id="speed-btn" class="ui-button">গতি 1×</button>
+      </div>
+    </header>
+
+    <section class="intro">
+      <span class="eyebrow">OUR COSMIC NEIGHBOURHOOD</span>
+      <h1>সৌরজগৎ <span>অন্বেষণ করো</span></h1>
+      <p>একটি বস্তু বেছে নাও, কাছে যাও এবং মহাকাশ সম্পর্কে জানো।</p>
+    </section>
+
+    <section class="search-wrap">
+      <label class="sr-only" for="object-search">বস্তু খুঁজুন</label>
+      <input id="object-search" type="search" placeholder="গ্রহ খুঁজুন… Earth, Mars, Pluto" autocomplete="off">
+      <button id="search-btn" class="ui-button" type="button">খুঁজুন</button>
+    </section>
+
+    <section id="info-panel" class="glass-panel" aria-live="polite">
+      <button id="close-info" class="close-button" aria-label="তথ্য প্যানেল বন্ধ করুন">×</button>
+      <div class="panel-kicker"><span class="live-dot"></span> COSMIC PROFILE</div>
+      <h2 id="object-name">সূর্য</h2>
+      <p id="object-subtitle" class="subtitle">আমাদের সৌরজগতের নক্ষত্র</p>
+      <div id="object-facts" class="facts"></div>
+      <button id="focus-btn" class="primary-button" type="button">◎ এই বস্তুতে ফোকাস</button>
+    </section>
+
+    <nav class="planet-nav" aria-label="মহাজাগতিক বস্তু নির্বাচন">
+      <button class="planet-button active" data-object="Sun"><b>☀</b><span>সূর্য</span></button>
+      <button class="planet-button" data-object="Mercury"><b>●</b><span>বুধ</span></button>
+      <button class="planet-button" data-object="Venus"><b>●</b><span>শুক্র</span></button>
+      <button class="planet-button" data-object="Earth"><b>🌍</b><span>পৃথিবী</span></button>
+      <button class="planet-button" data-object="Moon"><b>☾</b><span>চাঁদ</span></button>
+      <button class="planet-button" data-object="Mars"><b>●</b><span>মঙ্গল</span></button>
+      <button class="planet-button" data-object="Jupiter"><b>●</b><span>বৃহস্পতি</span></button>
+      <button class="planet-button" data-object="Saturn"><b>◉</b><span>শনি</span></button>
+      <button class="planet-button" data-object="Uranus"><b>●</b><span>ইউরেনাস</span></button>
+      <button class="planet-button" data-object="Neptune"><b>●</b><span>নেপচুন</span></button>
+      <button class="planet-button" data-object="Ceres"><b>◌</b><span>Ceres</span></button>
+      <button class="planet-button" data-object="Pluto"><b>◌</b><span>Pluto</span></button>
+      <button class="planet-button" data-object="Halley"><b>☄</b><span>ধূমকেতু</span></button>
+    </nav>
+
+    <aside class="view-controls" aria-label="দৃশ্য নিয়ন্ত্রণ">
+      <button id="reset-btn" class="ui-button" type="button">↺ Overview</button>
+      <button id="orbit-btn" class="ui-button" type="button">Orbit: ON</button>
+      <button id="label-btn" class="ui-button" type="button">Labels: ON</button>
+      <button id="tour-btn" class="ui-button" type="button">▶ Guided Tour</button>
+    </aside>
+
+    <div class="help-tip">ড্র্যাগ: দৃশ্য ঘোরাও · Scroll: Zoom · ক্লিক: তথ্য</div>
+    <div id="status" class="status">3D দৃশ্য প্রস্তুত হচ্ছে…</div>
+    <div id="error-message" class="error-message" role="alert" hidden></div>
+  </main>
+</body>
+</html>
