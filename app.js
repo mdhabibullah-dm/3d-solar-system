@@ -64,8 +64,7 @@ const textureFailures = new Set();
 function getTexture(filename) {
   if (textureCache.has(filename)) return textureCache.get(filename);
 
-  const texture = loader.load(
-    `./textures/${filename}`,
+const texture = loader.load(`./${filename}`, ...);
     undefined,
     undefined,
     () => {
