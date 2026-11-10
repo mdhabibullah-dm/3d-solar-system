@@ -57,27 +57,45 @@ scene.add(sunlight);
 // TEXTURES — uses the existing ./textures directory
 // ================================================
 
+
 const loader = new THREE.TextureLoader();
 const textureCache = new Map();
 const textureFailures = new Set();
 
 function getTexture(filename) {
-  if (textureCache.has(filename)) return textureCache.get(filename);
+  if (textureCache.has(filename)) {
+    return textureCache.get(filename);
+  }
 
-const texture = loader.load(`./${filename}`, ...);
+  const texturePath = new URL(filename, import.meta.url).href;
+
+  const texture = loader.load(
+    texturePath,
+
+    (loadedTexture) => {
+      loadedTexture.colorSpace = THREE.SRGBColorSpace;
+      textureFailures.delete(filename);
+      console.log(`Texture loaded: ${filename}`);
+    },
+
     undefined,
-    undefined,
-    () => {
+
+    (error) => {
       textureFailures.add(filename);
-      console.warn(`Texture failed to load: ./textures/${filename}`);
-      if (status) status.textContent = `ছবি পাওয়া যায়নি: ${filename}`;
+      console.error(`Texture failed: ${texturePath}`, error);
+
+      if (status) {
+        status.textContent = `Texture load failed: ${filename}`;
+      }
     }
   );
 
   texture.colorSpace = THREE.SRGBColorSpace;
   textureCache.set(filename, texture);
+
   return texture;
 }
+
 
 // ================================================
 // STARFIELD — one lightweight point cloud
